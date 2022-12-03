@@ -15,12 +15,8 @@ def groupCalories():
 
 def part1():
     calories = groupCalories()
-    max_cal = 0
-    for group in calories:
-        cal_sum = sum(group)
-        if cal_sum > max_cal:
-            max_cal = cal_sum
-    return max_cal
+    sumGroups = [sum(group) for group in calories]
+    return max(sumGroups)
 
 def part2():
     calories = groupCalories()
@@ -31,3 +27,4 @@ def part2():
             top_three[0] = cal_sum
             top_three.sort()
     return sum(top_three)
+
