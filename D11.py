@@ -1,8 +1,13 @@
+first_primes_list = [2,3,5,7,11,13,17,19]
+
 class Monkey:
-    def __init__(self, items, op, test, monkeyTrue, monkeyFalse):
-        self.items = items
-        self.op = op
-        self.test = test
+    def __init__(self, items, operator, b, div, monkeyTrue, monkeyFalse):
+        self.items = [[item % prime == 0 for prime in first_primes_list] for item in items]
+        self.op = lambda item_primes : item_primes if b == 'old' else \
+            [item_primes[i] or first_primes_list[i] in prime_factors(int(b)) for i in range(7)] if operator == '*'
+        else
+
+        self.test = lambda x : x % div == 0
         self.monkeyTrue = monkeyTrue
         self.monkeyFalse = monkeyFalse
         self.itemsInspected = 0
@@ -23,7 +28,7 @@ def createMonkeys():
             (operator, b) = lines[i+2].strip('\n').split(" ")[-2:]
             monkeyTrue = int(lines[i+4].strip('\n').split(" ").pop())
             monkeyFalse = int(lines[i+5].strip('\n').split(" ").pop())
-            monkeyList.append(Monkey(items, lambda x : ops[operator](x, x if b == 'old' else int(b)), lambda x : x % div == 0, monkeyTrue, monkeyFalse))
+            monkeyList.append(Monkey(items, ops[operator], b, div, monkeyTrue, monkeyFalse))
         f.close()
     return monkeyList
 
